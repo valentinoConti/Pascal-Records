@@ -8,6 +8,8 @@ I decided to help her and thats why this repository exists!
 
 All this project is made on [*Lazarus IDE*](https://www.lazarus-ide.org/)
 
+All the files gotta be in the same folder, you can use the compiled executable (Project.exe) to test it out or you can open the project main source (Project.lpr) with Lazarus and compile it by yourself
+
 ## The exercise:
 
 #### Spanish (original):
