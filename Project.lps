@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="10"/>
+    <BuildModes Active="Default"/>
+    <Units Count="1">
+      <Unit0>
+        <Filename Value="Project.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="RecordsProject"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="10"/>
+        <CursorPos X="12" Y="27"/>
+        <UsageCount Value="23"/>
+        <Loaded Value="True"/>
+      </Unit0>
+    </Units>
+    <JumpHistory Count="14" HistoryIndex="13">
+      <Position1>
+        <Filename Value="Project.lpr"/>
+        <Caret Line="18" Column="11"/>
+      </Position1>
+      <Position2>
+        <Filename Value="Project.lpr"/>
+        <Caret Line="17" Column="10"/>
+      </Position2>
+      <Position3>
+        <Filename Value="Project.lpr"/>
+        <Caret Line="16" Column="10"/>
+      </Position3>
+      <Position4>
+        <Filename Value="Project.lpr"/>
+        <Caret Line="19" Column="11"/>
+      </Position4>
+      <Position5>
+        <Filename Value="Project.lpr"/>
+        <Caret Line="20" Column="11"/>
+      </Position5>
+      <Position6>
+        <Filename Value="Project.lpr"/>
+        <Caret Line="23" Column="11"/>
+      </Position6>
+      <Position7>
+        <Filename Value="Project.lpr"/>
+        <Caret Line="15" Column="13" TopLine="7"/>
+      </Position7>
+      <Position8>
+        <Filename Value="Project.lpr"/>
+        <Caret Line="14" Column="12"/>
+      </Position8>
+      <Position9>
+        <Filename Value="Project.lpr"/>
+        <Caret Line="7" Column="15"/>
+      </Position9>
+      <Position10>
+        <Filename Value="Project.lpr"/>
+        <Caret Line="8" Column="12"/>
+      </Position10>
+      <Position11>
+        <Filename Value="Project.lpr"/>
+        <Caret Line="9" Column="14"/>
+      </Position11>
+      <Position12>
+        <Filename Value="Project.lpr"/>
+        <Caret Line="10" Column="10"/>
+      </Position12>
+      <Position13>
+        <Filename Value="Project.lpr"/>
+        <Caret Line="35" Column="34" TopLine="27"/>
+      </Position13>
+      <Position14>
+        <Filename Value="Project.lpr"/>
+        <Caret Line="265" Column="51" TopLine="244"/>
+      </Position14>
+    </JumpHistory>
+  </ProjectSession>
+</CONFIG>
