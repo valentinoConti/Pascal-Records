@@ -8,7 +8,7 @@ I decided to help her and thats why this repository exists!
 
 All this project is made on [*Lazarus IDE*](https://www.lazarus-ide.org/)
 
-All the files gotta be in the same folder, you can use the compiled executable (Project.exe) to test it out or you can open the project main source (Project.lpr) with Lazarus and compile it by yourself
+You can use the compiled executable (Project.exe) to test it out or you can open the project source (Project.pas) with Lazarus and compile it by yourself
 
 ## The exercise:
 
@@ -27,4 +27,9 @@ just three accounts at the time. The data for the record will be: Client-code, O
 
 Generate a program that loads the file (fill it) and allows you to see the data.
 
-_P.S: I'm not professional at English so maybe i had more than one error writing this, sorry about that, contributions gladly accepted!_ 
+#### Updated:
+I added to the project the options to add data to the file without cleaning it all; and the option to modify data that already exists; this options weren't in the exercise but I tried to do them just to test the possibilities ^^
+
+_P.S: I'm not professional at English so maybe i had more than one error writing this, sorry about that!_
+
+_P.S 2: The code HAS NOT Procedures or Functions, the reason for this is that my friend didn't know how to use at that time and this project started to help her_
