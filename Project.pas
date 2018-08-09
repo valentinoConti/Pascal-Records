@@ -39,7 +39,7 @@ begin
       writeln('1. Create/CleanAll the file');
       writeln('2. Show file data');
       writeln('3. Add data to the file');
-      writeln('4. Modify/Delete data');
+      writeln('4. Modify data');
       writeln('9. Exit');
       writeln;
       readln(option);
@@ -47,7 +47,7 @@ begin
 
       case option of
 
-      1,3: //Create file and/or Modify data
+      1,3: //Create file and/or Add data
         begin
           ready:=False;
           case option of
@@ -354,7 +354,7 @@ begin
 
             repeat
               GotoXY(1, i+1);
-              writeln('Insert the code of the account you wanna edit or delete');
+              writeln('Insert the code of the account you wanna edit');
               GotoXY(1, i+3);Delline;
               read(modif);
             until ((modif > -1) and (modif < (i-3)));
@@ -416,5 +416,3 @@ begin
       end;
     until (exit = True);
 end.
-
-
