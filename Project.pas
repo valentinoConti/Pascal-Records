@@ -1,4 +1,4 @@
-program RecordsProject;
+program Project;
 Uses crt, sysutils;
 
 Type
@@ -20,6 +20,11 @@ var
     page: Integer;
     i,j,k: Integer;
     cliCod:Integer;
+    modif: Integer;
+    ownerS:String[30];
+    accountNumS:Integer;
+    cashS:Double;
+    overwrite: Integer;
 
 begin
     Assign(file_cli, 'Rdata.dat');
@@ -34,6 +39,7 @@ begin
       writeln('1. Create/CleanAll the file');
       writeln('2. Show file data');
       writeln('3. Add data to the file');
+      writeln('4. Modify/Delete data');
       writeln('9. Exit');
       writeln;
       readln(option);
@@ -41,13 +47,27 @@ begin
 
       case option of
 
-      1,3: //Generar archivo y/o Agregar Datos
+      1,3: //Create file and/or Modify data
         begin
           ready:=False;
           case option of
           1: begin
-             Rewrite(file_cli);
-             writeln('Empty file created! Add data:');
+               {$I-}
+               Reset(file_cli);
+               {$I+}
+               if IOResult = 0 then begin
+                 repeat
+                   writeln('File already exist! Are you sure you want to erase it all? (1-Yes  2-DONT!):');
+                   readln(overWrite);
+                 until ((overWrite = 1) or (overwrite = 2));
+                 if overwrite = 2 then halt(1) else begin
+                   Rewrite(file_cli);
+                   writeln('File is now empty! Add data:');
+                 end;
+               end else begin
+                 Rewrite(file_cli);
+                 writeln('Empty file created! Add data:');
+               end;
              end;
           3: begin
              Reset(file_cli);
@@ -66,8 +86,8 @@ begin
             {$I-}                                          //Ignore errors
             read(file_cli, rec_cli);                       //Read what is in that position (errors ignored)
             {$I+}                                          //Detect errors
-            if IOResult = 0 then begin                     //If there was not errors:
-              if cliCod = rec_cli.codClient then begin    //If that client already had at least one account
+            if IOResult = 0 then begin                     //If there was not errors (somethings was readed):
+              if cliCod = rec_cli.codClient then begin    //If that client already had at least one account:
                 rec_cli.codClient := cliCod;
                 cliCod:=cliCod+1000;
                 seek(file_cli, cliCod);                    //Search for that position +1000 (2nd account)
@@ -115,9 +135,13 @@ begin
             if option <> 6 then begin
               write('Owner: ');readln(rec_cli.owner);
               repeat
-                write('Account number (8 digits): ');readln(rec_cli.accountNum);
-              until ((rec_cli.accountNum >= 10000000) and (rec_cli.accountNum <= 99999999));
-              write('Cash: ');readln(rec_cli.cash);
+                write('Account number (8 digits): ');readln(accountNumS);
+              until ((accountNumS >= 10000000) and (accountNumS <= 99999999));
+              rec_cli.accountNum := accountNumS;
+              repeat
+                write('Cash: ');readln(cashS);
+              until (cashS <= 999999999.99);
+              rec_cli.cash := cashS;
               writeln;
 
               seek(file_cli, cliCod);
@@ -271,6 +295,117 @@ begin
 
             end;
           end;
+        end;
+
+        4:    //Modify Record data
+        begin
+          repeat
+            writeln('Edit specific client');
+            writeln;
+            write('Client code to search: ');readln(cliCod);
+          until ((cliCod > 0) and (cliCod <= 1000));
+
+          clrscr;
+          Reset(file_cli);
+          GotoXY (1, 1);
+          write('Client');
+          GotoXY (9, 1);
+          write('Owner');
+          GotoXY (39, 1);
+          write('Account');
+          GotoXY (49, 1);
+          write('Cash');
+          GotoXY (73, 1);
+          write('Code');
+          i:=3;
+
+          for k:=0 to 2 do
+          begin
+            seek(file_cli, cliCod+k*1000);
+            {$I-}
+            read(file_cli, rec_cli);
+            {$I+}
+            if IOResult = 0 then begin
+              if rec_cli.codClient <> 0 then begin
+                GotoXY (2, i);
+                write(rec_cli.codClient);
+                GotoXY (9, i);
+                write(rec_cli.owner);
+                GotoXY (38, i);
+                write(rec_cli.accountNum);
+                GotoXY (49, i);
+                write(rec_cli.cash:0:2);
+                GotoXY(76, i);
+                write(k);
+                i:=i+1;
+              end;
+            end;
+          end;
+
+          if (i-3) = 0 then
+          begin
+            writeln;
+            writeln;
+            writeln('There are no accounts with that client number.');
+            write('Press ENTER to come back');
+            readln;
+
+          end else begin
+
+            repeat
+              GotoXY(1, i+1);
+              writeln('Insert the code of the account you wanna edit or delete');
+              GotoXY(1, i+3);Delline;
+              read(modif);
+            until ((modif > -1) and (modif < (i-3)));
+
+            clrScr;
+            seek(file_cli, cliCod+modif*1000);
+            {$I-}
+            read(file_cli, rec_cli);
+            {$I+}
+            if IOResult = 0 then begin
+              if rec_cli.codClient = cliCod then begin
+                repeat
+                  clrScr;
+                  writeln('Modifying data');
+                  writeln('-----------------------------');
+                  writeln;
+                  writeln('Actual data:');
+                  writeln;
+
+                  writeln('Client: '); GotoXY(20, 6); writeln(rec_cli.codClient);
+                  writeln('Owner: '); GotoXY(20, 7); writeln(rec_cli.owner);
+                  writeln('Account Number: '); GotoXY(20, 8); writeln(rec_cli.accountNum);
+                  writeln('Cash: '); GotoXY(20, 9); writeln(rec_cli.cash:0:2);
+                  writeln;
+                  writeln('New data:');
+                  writeln;
+                  writeln('Client:            ',cliCod);
+                  writeln('Owner: ');
+                  writeln('Account Number: ');
+                  writeln('Cash: ');
+                  writeln;
+
+                  readln;
+
+                  GotoXY(20, 14); readln(ownerS);
+                  GotoXy(20, 15); readln(accountNumS);
+                  GotoXy(20, 16); readln(cashS);
+
+                until (((accountNumS >= 10000000) and (accountNumS <= 99999999)) and (cashS <= 999999999.99));
+                rec_cli.owner := ownerS;
+                rec_cli.accountNum := accountNumS;
+                rec_cli.cash := cashS;
+                seek(file_cli, FilePos(file_cli)-1);
+                write(file_cli, rec_cli);
+
+              end;
+            end;
+          end;
+
+          i:=1;
+
         end;
 
       9:   //Exit program
